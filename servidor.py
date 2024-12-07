@@ -1,7 +1,5 @@
-
-import socket
 import threading
-import biblioteca_de_rede as lan
+import objetos as _
 
 #configuracao
 HOST = "0.0.0.0"
@@ -19,10 +17,10 @@ def main(conn):
         print(f"{nome_cliente}: {mensagem_cliente}")
 
 
-print(lan.Server.config(HOST, PORT))
+print(_.server.config(HOST, PORT))
 
 while True:
 
-    conn, addr = lan.Server.accept()
+    conn, addr = _.server.accept()
 
     threading.Thread(target = main, args = (conn,)).start()

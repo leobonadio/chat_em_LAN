@@ -2,14 +2,15 @@ import socket
 
 class Server:
 
+    def __init__(self):
+        self.server = None
+
     # configuracao do servidor
     def config(self, host, port):
 
-        global server
-
-        server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        server.bind((host, port))
-        server.listen(10)
+        self.server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.server.bind((host, port))
+        self.server.listen(10)
 
         return "Aguardando conexões..."
     
@@ -17,20 +18,22 @@ class Server:
     # aceitar conexoes
     def accept(self):
 
-        return server.accept()
+        return self.server.accept()
 
 
 class Client:
 
+    def __init__(self):
+        self.client = None
+
     #configuracao do cliente
     def config(self, server_ip, server_port):
 
-        global client
-
-        client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        client.connect((server_ip, server_port))
+        self.client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.client.connect((server_ip, server_port))
 
         return "conectado!"
     
     def send(self, message):
-        client.sendall(message.encode())
+        
+        self.client.sendall(message.encode())
